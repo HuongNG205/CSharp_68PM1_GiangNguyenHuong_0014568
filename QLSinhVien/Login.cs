@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace QLSinhVien
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
@@ -23,7 +23,7 @@ namespace QLSinhVien
             string password = txtPassword.Text;
             if (username == "0014568@st.huce.edu.vn" && password == "0014568")
             {
-                Form2 f2 = new Form2();
+                Home f2 = new Home();
                 f2.Show();
                 this.Hide();
             }

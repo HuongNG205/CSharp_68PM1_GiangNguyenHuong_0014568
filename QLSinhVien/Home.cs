@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 namespace QLSinhVien
 {
-    public partial class Form2 : Form
+    public partial class Home : Form
     {
-        public Form2()
+        UserControlStudent ucStudent = new UserControlStudent();
+        UserControlClass ucClass = new UserControlClass();
+        public Home()
         {
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private void Home_Load(object sender, EventArgs e)
         {
             ShowStudentPage();
         }
@@ -30,8 +32,9 @@ namespace QLSinhVien
 
         private void ShowStudentPage()
         {
-            pnl_Student.Visible = true;
-            pnl_Class.Visible = false;
+            pnl_main.Controls.Clear();
+            ucStudent.Dock = DockStyle.Fill;
+            pnl_main.Controls.Add(ucStudent);
 
             ResetMenuStyle();
             QLSinhVienPage.Font = new Font(QLSinhVienPage.Font, FontStyle.Bold);
@@ -39,12 +42,14 @@ namespace QLSinhVien
 
         private void ShowClassPage()
         {
-            pnl_Student.Visible = false;
-            pnl_Class.Visible = true;
+            pnl_main.Controls.Clear();
+            ucClass.Dock = DockStyle.Fill;
+            pnl_main.Controls.Add(ucClass);
 
             ResetMenuStyle();
             QLLopHocPage.Font = new Font(QLLopHocPage.Font, FontStyle.Bold);
         }
+
         private void QLSinhVienPage_Click(object sender, EventArgs e)
         {
             ShowStudentPage();
@@ -66,10 +71,12 @@ namespace QLSinhVien
 
             if (result == DialogResult.Yes)
             {
-                Form1 f1 = new Form1();
+                Login f1 = new Login();
                 f1.Show();
                 this.Hide();
             }
         }
+
+
     }
 }
