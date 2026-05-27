@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ctn_Class = new System.Windows.Forms.SplitContainer();
             this.btn_viewCl = new System.Windows.Forms.Button();
             this.btn_renewCl = new System.Windows.Forms.Button();
@@ -51,10 +51,6 @@
             this.btn_goBackCl = new System.Windows.Forms.Button();
             this.btn_goFirstCl = new System.Windows.Forms.Button();
             this.table_Class = new System.Windows.Forms.DataGridView();
-            this.MaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MaLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenLop = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Note = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_searchCl = new System.Windows.Forms.Button();
             this.txt_searchCl = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -109,6 +105,7 @@
             this.btn_viewCl.TabIndex = 5;
             this.btn_viewCl.Text = "Xem danh sách sinh viên";
             this.btn_viewCl.UseVisualStyleBackColor = false;
+            this.btn_viewCl.Click += new System.EventHandler(this.btn_viewCl_Click);
             // 
             // btn_renewCl
             // 
@@ -123,6 +120,7 @@
             this.btn_renewCl.TabIndex = 4;
             this.btn_renewCl.Text = "Làm mới";
             this.btn_renewCl.UseVisualStyleBackColor = false;
+            this.btn_renewCl.Click += new System.EventHandler(this.btn_renewCl_Click);
             // 
             // btn_deleteCl
             // 
@@ -137,6 +135,7 @@
             this.btn_deleteCl.TabIndex = 3;
             this.btn_deleteCl.Text = "Xóa";
             this.btn_deleteCl.UseVisualStyleBackColor = false;
+            this.btn_deleteCl.Click += new System.EventHandler(this.btn_deleteCl_Click);
             // 
             // btn_updateCl
             // 
@@ -151,6 +150,7 @@
             this.btn_updateCl.TabIndex = 2;
             this.btn_updateCl.Text = "Sửa";
             this.btn_updateCl.UseVisualStyleBackColor = false;
+            this.btn_updateCl.Click += new System.EventHandler(this.btn_updateCl_Click);
             // 
             // btn_addCl
             // 
@@ -165,6 +165,7 @@
             this.btn_addCl.TabIndex = 1;
             this.btn_addCl.Text = "Thêm";
             this.btn_addCl.UseVisualStyleBackColor = false;
+            this.btn_addCl.Click += new System.EventHandler(this.btn_addCl_Click);
             // 
             // groupBox1
             // 
@@ -330,48 +331,21 @@
             // 
             this.table_Class.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.table_Class.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.table_Class.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table_Class.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.table_Class.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.table_Class.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaID,
-            this.MaLop,
-            this.TenLop,
-            this.Note});
             this.table_Class.Location = new System.Drawing.Point(11, 80);
             this.table_Class.Name = "table_Class";
             this.table_Class.RowHeadersVisible = false;
             this.table_Class.Size = new System.Drawing.Size(662, 304);
             this.table_Class.TabIndex = 4;
-            // 
-            // MaID
-            // 
-            this.MaID.FillWeight = 30F;
-            this.MaID.HeaderText = "Mã ID";
-            this.MaID.Name = "MaID";
-            // 
-            // MaLop
-            // 
-            this.MaLop.FillWeight = 50F;
-            this.MaLop.HeaderText = "Mã lớp";
-            this.MaLop.Name = "MaLop";
-            // 
-            // TenLop
-            // 
-            this.TenLop.FillWeight = 50F;
-            this.TenLop.HeaderText = "Tên lớp";
-            this.TenLop.Name = "TenLop";
-            // 
-            // Note
-            // 
-            this.Note.HeaderText = "Ghi chú";
-            this.Note.Name = "Note";
+            this.table_Class.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_Class_CellClick);
             // 
             // btn_searchCl
             // 
@@ -386,6 +360,7 @@
             this.btn_searchCl.TabIndex = 3;
             this.btn_searchCl.Text = "Tìm";
             this.btn_searchCl.UseVisualStyleBackColor = false;
+            this.btn_searchCl.Click += new System.EventHandler(this.btn_searchCl_Click);
             // 
             // txt_searchCl
             // 
@@ -412,6 +387,7 @@
             this.Controls.Add(this.ctn_Class);
             this.Name = "UserControlClass";
             this.Size = new System.Drawing.Size(987, 481);
+            this.Load += new System.EventHandler(this.UserControlClass_Load);
             this.ctn_Class.Panel1.ResumeLayout(false);
             this.ctn_Class.Panel2.ResumeLayout(false);
             this.ctn_Class.Panel2.PerformLayout();
@@ -448,10 +424,6 @@
         private System.Windows.Forms.Button btn_goBackCl;
         private System.Windows.Forms.Button btn_goFirstCl;
         private System.Windows.Forms.DataGridView table_Class;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenLop;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Note;
         private System.Windows.Forms.Button btn_searchCl;
         private System.Windows.Forms.TextBox txt_searchCl;
         private System.Windows.Forms.Label label13;

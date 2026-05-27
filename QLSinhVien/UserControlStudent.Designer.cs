@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ctn_Student = new System.Windows.Forms.SplitContainer();
             this.btn_renewSt = new System.Windows.Forms.Button();
             this.btn_deleteSt = new System.Windows.Forms.Button();
@@ -52,11 +52,6 @@
             this.btn_goBackSt = new System.Windows.Forms.Button();
             this.btn_goFirstSt = new System.Windows.Forms.Button();
             this.table_Student = new System.Windows.Forms.DataGridView();
-            this.MaSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.birth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Class = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_searchSt = new System.Windows.Forms.Button();
             this.txt_searchSt = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -109,6 +104,7 @@
             this.btn_renewSt.TabIndex = 4;
             this.btn_renewSt.Text = "Làm mới";
             this.btn_renewSt.UseVisualStyleBackColor = false;
+            this.btn_renewSt.Click += new System.EventHandler(this.btn_renewSt_Click);
             // 
             // btn_deleteSt
             // 
@@ -123,6 +119,7 @@
             this.btn_deleteSt.TabIndex = 3;
             this.btn_deleteSt.Text = "Xóa";
             this.btn_deleteSt.UseVisualStyleBackColor = false;
+            this.btn_deleteSt.Click += new System.EventHandler(this.btn_deleteSt_Click);
             // 
             // btn_updateSt
             // 
@@ -137,6 +134,7 @@
             this.btn_updateSt.TabIndex = 2;
             this.btn_updateSt.Text = "Sửa";
             this.btn_updateSt.UseVisualStyleBackColor = false;
+            this.btn_updateSt.Click += new System.EventHandler(this.btn_updateSt_Click);
             // 
             // btn_addSt
             // 
@@ -151,6 +149,7 @@
             this.btn_addSt.TabIndex = 1;
             this.btn_addSt.Text = "Thêm";
             this.btn_addSt.UseVisualStyleBackColor = false;
+            this.btn_addSt.Click += new System.EventHandler(this.btn_addSt_Click);
             // 
             // box_Student
             // 
@@ -345,55 +344,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.table_Student.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.table_Student.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.table_Student.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table_Student.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.table_Student.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.table_Student.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.MaSV,
-            this.TenSV,
-            this.Gender,
-            this.birth,
-            this.Class});
             this.table_Student.Location = new System.Drawing.Point(11, 80);
             this.table_Student.Name = "table_Student";
             this.table_Student.RowHeadersVisible = false;
             this.table_Student.Size = new System.Drawing.Size(639, 304);
             this.table_Student.TabIndex = 4;
-            // 
-            // MaSV
-            // 
-            this.MaSV.FillWeight = 65F;
-            this.MaSV.HeaderText = "Mã SV";
-            this.MaSV.Name = "MaSV";
-            // 
-            // TenSV
-            // 
-            this.TenSV.HeaderText = "Họ và Tên";
-            this.TenSV.Name = "TenSV";
-            // 
-            // Gender
-            // 
-            this.Gender.FillWeight = 45F;
-            this.Gender.HeaderText = "Giới Tính";
-            this.Gender.Name = "Gender";
-            // 
-            // birth
-            // 
-            this.birth.FillWeight = 70F;
-            this.birth.HeaderText = "Ngày Sinh";
-            this.birth.Name = "birth";
-            // 
-            // Class
-            // 
-            this.Class.FillWeight = 35F;
-            this.Class.HeaderText = "Lớp";
-            this.Class.Name = "Class";
+            this.table_Student.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.table_Student_CellClick);
             // 
             // btn_searchSt
             // 
@@ -408,6 +373,7 @@
             this.btn_searchSt.TabIndex = 3;
             this.btn_searchSt.Text = "Tìm";
             this.btn_searchSt.UseVisualStyleBackColor = false;
+            this.btn_searchSt.Click += new System.EventHandler(this.btn_searchSt_Click);
             // 
             // txt_searchSt
             // 
@@ -434,6 +400,7 @@
             this.Controls.Add(this.ctn_Student);
             this.Name = "UserControlStudent";
             this.Size = new System.Drawing.Size(954, 481);
+            this.Load += new System.EventHandler(this.UserControlStudent_Load);
             this.ctn_Student.Panel1.ResumeLayout(false);
             this.ctn_Student.Panel2.ResumeLayout(false);
             this.ctn_Student.Panel2.PerformLayout();
@@ -471,11 +438,6 @@
         private System.Windows.Forms.Button btn_goBackSt;
         private System.Windows.Forms.Button btn_goFirstSt;
         private System.Windows.Forms.DataGridView table_Student;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaSV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenSV;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Gender;
-        private System.Windows.Forms.DataGridViewTextBoxColumn birth;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Class;
         private System.Windows.Forms.Button btn_searchSt;
         private System.Windows.Forms.TextBox txt_searchSt;
         private System.Windows.Forms.Label label6;

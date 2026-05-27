@@ -40,6 +40,16 @@ namespace QLSinhVien
             QLSinhVienPage.Font = new Font(QLSinhVienPage.Font, FontStyle.Bold);
         }
 
+        public void showStudentbyClass (UserControlStudent ucSV)
+        {
+            pnl_main.Controls.Clear();
+            ucStudent.Dock = DockStyle.Fill;
+            pnl_main.Controls.Add(ucSV);
+
+            ResetMenuStyle();
+            QLSinhVienPage.Font = new Font(QLSinhVienPage.Font, FontStyle.Bold);
+        }
+
         private void ShowClassPage()
         {
             pnl_main.Controls.Clear();
