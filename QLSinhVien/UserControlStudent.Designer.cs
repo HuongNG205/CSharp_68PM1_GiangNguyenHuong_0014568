@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ctn_Student = new System.Windows.Forms.SplitContainer();
             this.btn_renewSt = new System.Windows.Forms.Button();
             this.btn_deleteSt = new System.Windows.Forms.Button();
@@ -289,6 +289,7 @@
             this.btn_goLastSt.TabIndex = 9;
             this.btn_goLastSt.Text = ">>";
             this.btn_goLastSt.UseVisualStyleBackColor = false;
+            this.btn_goLastSt.Click += new System.EventHandler(this.btn_goLastSt_Click);
             // 
             // btn_goUpSt
             // 
@@ -302,6 +303,7 @@
             this.btn_goUpSt.TabIndex = 8;
             this.btn_goUpSt.Text = ">";
             this.btn_goUpSt.UseVisualStyleBackColor = false;
+            this.btn_goUpSt.Click += new System.EventHandler(this.btn_goUpSt_Click);
             // 
             // studentCount
             // 
@@ -324,6 +326,7 @@
             this.btn_goBackSt.TabIndex = 6;
             this.btn_goBackSt.Text = "<";
             this.btn_goBackSt.UseVisualStyleBackColor = false;
+            this.btn_goBackSt.Click += new System.EventHandler(this.btn_goBackSt_Click);
             // 
             // btn_goFirstSt
             // 
@@ -337,6 +340,7 @@
             this.btn_goFirstSt.TabIndex = 5;
             this.btn_goFirstSt.Text = "<<";
             this.btn_goFirstSt.UseVisualStyleBackColor = false;
+            this.btn_goFirstSt.Click += new System.EventHandler(this.btn_goFirstSt_Click);
             // 
             // table_Student
             // 
@@ -344,14 +348,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.table_Student.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.table_Student.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.table_Student.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.table_Student.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.table_Student.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.table_Student.Location = new System.Drawing.Point(11, 80);
             this.table_Student.Name = "table_Student";

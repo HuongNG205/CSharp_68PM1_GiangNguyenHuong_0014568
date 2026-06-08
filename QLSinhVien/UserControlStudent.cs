@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,11 @@ namespace QLSinhVien
     {
         DataClasses1DataContext db = new DataClasses1DataContext();
         string oldMaSV;
+
+        private const int pageSize = 13;
+        private int currentPage = 1;
+        private List<SinhVien> currentList = new List<SinhVien>();
+
         public UserControlStudent()
         {
             InitializeComponent();
@@ -50,20 +56,69 @@ namespace QLSinhVien
             txt_Class.DataSource = db.LopHocs.ToList();
             txt_Class.DisplayMember = "MaLop";
             txt_Class.ValueMember = "MaLop";
+            txt_Class.SelectedIndex = -1;
         }
-        private void LoadStudentTable()
+        private void LoadStudentTable(string keyword = "")
         {
-            List<SinhVien> svList = db.SinhViens.ToList();
-            table_Student.DataSource = svList;
+            if (string.IsNullOrWhiteSpace(keyword))
+            {
+                currentList = db.SinhViens.ToList();
+            }
+            else
+            {
+                string kw = keyword.Trim().ToLower();
+                currentList = db.SinhViens
+                    .Where(sv => sv.MaSV.ToLower().Contains(kw)
+                              || sv.HoTen.ToLower().Contains(kw)
+                              || sv.MaLop.ToLower().Contains(kw))
+                    .ToList();
+            }
+
+            currentPage = 1;
+            ShowCurrentPage();
+        }
+
+        public void LoadStudentByClass(string maLop)
+        {
+            currentList = db.SinhViens
+                .Where(s => s.MaLop == maLop)
+                .ToList();
+
+            currentPage = 1;
+            ShowCurrentPage();
+        }
+
+        private void ShowCurrentPage()
+        {
+            int totalRecords = currentList.Count;
+            int totalPages = Math.Max(1, (int)Math.Ceiling((double)totalRecords / pageSize));
+
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+
+            var pageData = currentList
+                .Skip((currentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            table_Student.DataSource = pageData;
+
+            if (table_Student.Columns.Contains("LopHoc"))
+                table_Student.Columns["LopHoc"].Visible = false;
 
             table_Student.Columns["MaSV"].HeaderText = "Mã sinh viên";
             table_Student.Columns["HoTen"].HeaderText = "Họ tên";
             table_Student.Columns["Gender"].HeaderText = "Giới tính";
             table_Student.Columns["Birth"].HeaderText = "Ngày sinh";
             table_Student.Columns["MaLop"].HeaderText = "Lớp";
-
             table_Student.Columns["Birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            table_Student.Columns["LopHoc"].Visible = false;
+
+            studentCount.Text = $"Trang {currentPage}/{totalPages} | {totalRecords} bản ghi";
+
+            btn_goFirstSt.Enabled = currentPage > 1;
+            btn_goBackSt.Enabled = currentPage > 1;
+            btn_goUpSt.Enabled = currentPage < totalPages;
+            btn_goLastSt.Enabled = currentPage < totalPages;
         }
 
         private void ClearData()
@@ -74,6 +129,7 @@ namespace QLSinhVien
             txt_Gender.SelectedIndex = -1;
             txt_Class.SelectedIndex = -1;
             txt_Birth.Value = DateTime.Now;
+            oldMaSV = null;
         }
 
         private void btn_addSt_Click(object sender, EventArgs e)
@@ -96,7 +152,6 @@ namespace QLSinhVien
         private void btn_updateSt_Click(object sender, EventArgs e)
         {
             SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == oldMaSV);
-
             if (sv == null)
             {
                 return;
@@ -117,7 +172,6 @@ namespace QLSinhVien
         private void btn_deleteSt_Click(object sender, EventArgs e)
         {
             SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
-
             if (sv == null)
             {
                 return;
@@ -138,40 +192,32 @@ namespace QLSinhVien
 
         private void btn_searchSt_Click(object sender, EventArgs e)
         {
-            string keyword = txt_searchSt.Text.Trim();
-
-            List<SinhVien> svList = db.SinhViens
-                .Where(sv => sv.MaSV.Contains(keyword)
-                          || sv.HoTen.Contains(keyword)
-                          || sv.MaLop.Contains(keyword))
-                .ToList();
-            table_Student.DataSource = svList;
-
-            table_Student.Columns["MaSV"].HeaderText = "Mã sinh viên";
-            table_Student.Columns["HoTen"].HeaderText = "Họ tên";
-            table_Student.Columns["Gender"].HeaderText = "Giới tính";
-            table_Student.Columns["Birth"].HeaderText = "Ngày sinh";
-            table_Student.Columns["MaLop"].HeaderText = "Lớp";
-
-            table_Student.Columns["Birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            table_Student.Columns["LopHoc"].Visible = false;
+            LoadStudentTable(txt_searchSt.Text);
         }
 
-        public void LoadStudentByClass(string maLop)
+        private void btn_goFirstSt_Click(object sender, EventArgs e)
         {
-            List<SinhVien> svList = db.SinhViens
-                .Where(s => s.MaLop.ToString() == maLop)
-                .ToList();
-            table_Student.DataSource = svList;
+            currentPage = 1;
+            ShowCurrentPage();
+        }
 
-            table_Student.Columns["MaSV"].HeaderText = "Mã sinh viên";
-            table_Student.Columns["HoTen"].HeaderText = "Họ tên";
-            table_Student.Columns["Gender"].HeaderText = "Giới tính";
-            table_Student.Columns["Birth"].HeaderText = "Ngày sinh";
-            table_Student.Columns["MaLop"].HeaderText = "Lớp";
+        private void btn_goBackSt_Click(object sender, EventArgs e)
+        {
+            currentPage--;
+            ShowCurrentPage();
+        }
 
-            table_Student.Columns["Birth"].DefaultCellStyle.Format = "dd/MM/yyyy";
-            table_Student.Columns["LopHoc"].Visible = false;
+        private void btn_goUpSt_Click(object sender, EventArgs e)
+        {
+            currentPage++;
+            ShowCurrentPage();
+        }
+
+        private void btn_goLastSt_Click(object sender, EventArgs e)
+        {
+            int totalPages = Math.Max(1, (int)Math.Ceiling((double)currentList.Count / pageSize));
+            currentPage = totalPages;
+            ShowCurrentPage();
         }
     }
 }
