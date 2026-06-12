@@ -188,10 +188,10 @@ namespace QLSinhVien
             ClearData();
         }
 
-        //private void btn_searchSt_Click(object sender, EventArgs e)
-        //{
-        //    LoadStudentTable(txt_searchSt.Text);
-        //}
+        private void btn_searchSt_Click(object sender, EventArgs e)
+        {
+            LoadStudentTable(txt_searchSt.Text);
+        }
 
         private void btn_goFirstSt_Click(object sender, EventArgs e)
         {
