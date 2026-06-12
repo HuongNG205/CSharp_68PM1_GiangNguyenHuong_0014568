@@ -167,20 +167,20 @@ namespace QLSinhVien
             ClearData();
         }
 
-        //private void btn_deleteSt_Click(object sender, EventArgs e)
-        //{
-        //    SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
-        //    if (sv == null)
-        //    {
-        //        return;
-        //    }
+        private void btn_deleteSt_Click(object sender, EventArgs e)
+        {
+            SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
+            if (sv == null)
+            {
+                return;
+            }
 
-        //    db.SinhViens.DeleteOnSubmit(sv);
-        //    db.SubmitChanges();
+            db.SinhViens.DeleteOnSubmit(sv);
+            db.SubmitChanges();
 
-        //    LoadStudentTable();
-        //    ClearData();
-        //}
+            LoadStudentTable();
+            ClearData();
+        }
 
         private void btn_renewSt_Click(object sender, EventArgs e)
         {
