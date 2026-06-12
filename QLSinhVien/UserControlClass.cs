@@ -33,15 +33,16 @@ namespace QLSinhVien
         {
             if (string.IsNullOrWhiteSpace(keyword))
             {
-                currentList = db.LopHocs.ToList();
+                currentList = db.LopHocs.Where(cl => cl.MaLop != "NONE").ToList();
             }
             else
             {
                 string kw = keyword.Trim().ToLower();
                 currentList = db.LopHocs
-                    .Where(cl => cl.id.ToString().Contains(kw)
+                    .Where(cl => cl.MaLop != "NONE" &&
+                                (cl.id.ToString().Contains(kw)
                               || cl.MaLop.ToLower().Contains(kw)
-                              || cl.TenLop.ToLower().Contains(kw))
+                              || cl.TenLop.ToLower().Contains(kw)))
                     .ToList();
             }
 
@@ -57,10 +58,10 @@ namespace QLSinhVien
             if (currentPage < 1) currentPage = 1;
             if (currentPage > totalPages) currentPage = totalPages;
 
-            var pageData = currentList
-                .Skip((currentPage - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            List<LopHoc> pageData = currentList
+                            .Skip((currentPage - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
             table_Class.DataSource = pageData;
 
@@ -89,19 +90,19 @@ namespace QLSinhVien
             txt_Note.Clear();
         }
 
-        private void table_Class_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0)
-            {
-                return;
-            }
+        //private void table_Class_CellClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    if (e.RowIndex < 0)
+        //    {
+        //        return;
+        //    }
 
-            DataGridViewRow row = table_Class.Rows[e.RowIndex];
-            txt_MaID.Text = row.Cells["id"].Value.ToString();
-            txt_MaLop.Text = row.Cells["MaLop"].Value.ToString();
-            txt_TenLop.Text = row.Cells["TenLop"].Value.ToString();
-            txt_Note.Text = row.Cells["Note"].Value?.ToString() ?? "";
-        }
+        //    DataGridViewRow row = table_Class.Rows[e.RowIndex];
+        //    txt_MaID.Text = row.Cells["id"].Value.ToString();
+        //    txt_MaLop.Text = row.Cells["MaLop"].Value.ToString();
+        //    txt_TenLop.Text = row.Cells["TenLop"].Value.ToString();
+        //    txt_Note.Text = row.Cells["Note"].Value?.ToString() ?? "";
+        //}
 
         private void btn_addCl_Click(object sender, EventArgs e)
         {
@@ -118,38 +119,48 @@ namespace QLSinhVien
             ClearData();
         }
 
-        private void btn_updateCl_Click(object sender, EventArgs e)
-        {
-            LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
-            if (cl == null)
-            {
-                return;
-            }
+        //private void btn_updateCl_Click(object sender, EventArgs e)
+        //{
+        //    LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
+        //    if (cl == null)
+        //    {
+        //        return;
+        //    }
 
-            cl.MaLop = txt_MaLop.Text.Trim();
-            cl.TenLop = txt_TenLop.Text.Trim();
-            cl.Note = txt_Note.Text.Trim();
+        //    cl.MaLop = txt_MaLop.Text.Trim();
+        //    cl.TenLop = txt_TenLop.Text.Trim();
+        //    cl.Note = txt_Note.Text.Trim();
 
-            db.SubmitChanges();
+        //    db.SubmitChanges();
 
-            LoadClassTable();
-            ClearData();
-        }
+        //    LoadClassTable();
+        //    ClearData();
+        //}
 
-        private void btn_deleteCl_Click(object sender, EventArgs e)
-        {
-            LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
-            if (cl == null)
-            {
-                return;
-            }
+        //private void btn_deleteCl_Click(object sender, EventArgs e)
+        //{
+        //    LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
+        //    if (cl == null)
+        //    {
+        //        return;
+        //    }
 
-            db.LopHocs.DeleteOnSubmit(cl);
-            db.SubmitChanges();
+        //    List<SinhVien> studentList = db.SinhViens.Where(sv => sv.MaLop == cl.MaLop).ToList();
+        //    //foreach (SinhVien sv in studentList)
+        //    //{
+        //    //    sv.MaLop = "NONE";
+        //    //}
+        //    if (studentList.Count > 0)
+        //    {
+        //        return;
+        //    }
 
-            LoadClassTable();
-            ClearData();
-        }
+        //    db.LopHocs.DeleteOnSubmit(cl);
+        //    db.SubmitChanges();
+
+        //    LoadClassTable();
+        //    ClearData();
+        //}
 
         private void btn_renewCl_Click(object sender, EventArgs e)
         {
@@ -162,26 +173,24 @@ namespace QLSinhVien
             LoadClassTable(txt_searchCl.Text);
         }
 
-        private void btn_viewCl_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txt_MaLop.Text))
-            {
-                MessageBox.Show("Vui lòng chọn một lớp từ bảng trước.", "Thông báo",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
+        //private void btn_viewCl_Click(object sender, EventArgs e)
+        //{
+        //    if (string.IsNullOrWhiteSpace(txt_MaLop.Text))
+        //    {
+        //        return;
+        //    }
 
-            string maLop = txt_MaLop.Text.Trim();
+        //    //string maLop = txt_MaLop.Text.Trim();
 
-            UserControlStudent ucSV = new UserControlStudent();
+        //    //UserControlStudent ucSV = new UserControlStudent();
 
-            Home homeForm = this.FindForm() as Home;
-            if (homeForm == null) return;
+        //    //Home homeForm = this.FindForm() as Home;
+        //    //if (homeForm == null) return;
 
-            homeForm.showStudentbyClass(ucSV);
+        //    //homeForm.showStudentbyClass(ucSV);
 
-            ucSV.LoadStudentByClass(maLop);
-        }
+        //    //ucSV.LoadStudentByClass(maLop);
+        //}
 
         private void btn_goFirstCl_Click(object sender, EventArgs e)
         {

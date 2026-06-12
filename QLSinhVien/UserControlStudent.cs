@@ -14,7 +14,6 @@ namespace QLSinhVien
     public partial class UserControlStudent : UserControl
     {
         DataClasses1DataContext db = new DataClasses1DataContext();
-        string oldMaSV;
 
         private const int pageSize = 13;
         private int currentPage = 1;
@@ -43,17 +42,17 @@ namespace QLSinhVien
             txt_TenSV.Text = row.Cells["HoTen"].Value.ToString();
             txt_Gender.Text = row.Cells["Gender"].Value.ToString();
             txt_Class.Text = row.Cells["MaLop"].Value.ToString();
-            oldMaSV = row.Cells["MaSV"].Value.ToString();
-
             if (row.Cells["Birth"].Value != null)
             {
                 txt_Birth.Value = Convert.ToDateTime(row.Cells["Birth"].Value);
             }
+
+            txt_MaSV.ReadOnly = true;
         }
 
         private void LoadCombobox()
         {
-            txt_Class.DataSource = db.LopHocs.ToList();
+            txt_Class.DataSource = db.LopHocs.Where(cl => cl.MaLop != "NONE").ToList();
             txt_Class.DisplayMember = "MaLop";
             txt_Class.ValueMember = "MaLop";
             txt_Class.SelectedIndex = -1;
@@ -96,10 +95,10 @@ namespace QLSinhVien
             if (currentPage < 1) currentPage = 1;
             if (currentPage > totalPages) currentPage = totalPages;
 
-            var pageData = currentList
-                .Skip((currentPage - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
+            List<SinhVien> pageData = currentList
+                            .Skip((currentPage - 1) * pageSize)
+                            .Take(pageSize)
+                            .ToList();
 
             table_Student.DataSource = pageData;
 
@@ -124,12 +123,12 @@ namespace QLSinhVien
         private void ClearData()
         {
             txt_MaSV.Clear();
+            txt_MaSV.ReadOnly = false;
             txt_TenSV.Clear();
             txt_searchSt.Clear();
             txt_Gender.SelectedIndex = -1;
             txt_Class.SelectedIndex = -1;
             txt_Birth.Value = DateTime.Now;
-            oldMaSV = null;
         }
 
         private void btn_addSt_Click(object sender, EventArgs e)
@@ -149,40 +148,39 @@ namespace QLSinhVien
             ClearData();
         }
 
-        private void btn_updateSt_Click(object sender, EventArgs e)
-        {
-            SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == oldMaSV);
-            if (sv == null)
-            {
-                return;
-            }
+        //private void btn_updateSt_Click(object sender, EventArgs e)
+        //{
+        //    SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
+        //    if (sv == null)
+        //    {
+        //        return;
+        //    }
 
-            sv.MaSV = txt_MaSV.Text.Trim();
-            sv.HoTen = txt_TenSV.Text.Trim();
-            sv.Gender = txt_Gender.Text;
-            sv.Birth = txt_Birth.Value;
-            sv.MaLop = txt_Class.Text;
+        //    sv.HoTen = txt_TenSV.Text.Trim();
+        //    sv.Gender = txt_Gender.Text;
+        //    sv.Birth = txt_Birth.Value;
+        //    sv.MaLop = txt_Class.Text;
 
-            db.SubmitChanges();
+        //    db.SubmitChanges();
 
-            LoadStudentTable();
-            ClearData();
-        }
+        //    LoadStudentTable();
+        //    ClearData();
+        //}
 
-        private void btn_deleteSt_Click(object sender, EventArgs e)
-        {
-            SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
-            if (sv == null)
-            {
-                return;
-            }
+        //private void btn_deleteSt_Click(object sender, EventArgs e)
+        //{
+        //    SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
+        //    if (sv == null)
+        //    {
+        //        return;
+        //    }
 
-            db.SinhViens.DeleteOnSubmit(sv);
-            db.SubmitChanges();
+        //    db.SinhViens.DeleteOnSubmit(sv);
+        //    db.SubmitChanges();
 
-            LoadStudentTable();
-            ClearData();
-        }
+        //    LoadStudentTable();
+        //    ClearData();
+        //}
 
         private void btn_renewSt_Click(object sender, EventArgs e)
         {
@@ -190,10 +188,10 @@ namespace QLSinhVien
             ClearData();
         }
 
-        private void btn_searchSt_Click(object sender, EventArgs e)
-        {
-            LoadStudentTable(txt_searchSt.Text);
-        }
+        //private void btn_searchSt_Click(object sender, EventArgs e)
+        //{
+        //    LoadStudentTable(txt_searchSt.Text);
+        //}
 
         private void btn_goFirstSt_Click(object sender, EventArgs e)
         {

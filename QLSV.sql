@@ -33,7 +33,8 @@ VALUES
 (N'68PM1',  N'Lớp 68PM1'),
 (N'68PM2',  N'Lớp 68PM2'),
 (N'68MHT1', N'Lớp 68MHT1'),
-(N'68MHT2', N'Lớp 68MHT2')
+(N'68MHT2', N'Lớp 68MHT2'),
+(N'NONE',  N'Chưa phân lớp')
 GO
 
 -- Nhập dữ liệu cho bảng SinhVien
@@ -56,4 +57,14 @@ VALUES
 ('SV0013', N'Đặng Gia Bảo',    N'Nam', '2005-01-01', N'68PM1'),
 ('SV0014', N'Lý Thảo Nhi',     N'Nữ',  '2005-09-12', N'68PM2'),
 ('SV0015', N'Chu Minh Khang',  N'Nam', '2004-06-06', N'68MHT1')
+GO
+
+ALTER TABLE SinhViens DROP CONSTRAINT FK_SinhVien_LopHoc;
+GO
+
+ALTER TABLE SinhViens
+ADD CONSTRAINT FK_SinhVien_LopHoc
+    FOREIGN KEY (MaLop)
+    REFERENCES LopHocs(MaLop)
+    ON UPDATE CASCADE;
 GO
