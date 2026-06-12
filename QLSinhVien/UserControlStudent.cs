@@ -77,15 +77,15 @@ namespace QLSinhVien
             ShowCurrentPage();
         }
 
-        public void LoadStudentByClass(string maLop)
-        {
-            currentList = db.SinhViens
-                .Where(s => s.MaLop == maLop)
-                .ToList();
+        //public void LoadStudentByClass(string maLop)
+        //{
+        //    currentList = db.SinhViens
+        //        .Where(s => s.MaLop == maLop)
+        //        .ToList();
 
-            currentPage = 1;
-            ShowCurrentPage();
-        }
+        //    currentPage = 1;
+        //    ShowCurrentPage();
+        //}
 
         private void ShowCurrentPage()
         {

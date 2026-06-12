@@ -173,24 +173,28 @@ namespace QLSinhVien
             LoadClassTable(txt_searchCl.Text);
         }
 
-        //private void btn_viewCl_Click(object sender, EventArgs e)
-        //{
-        //    if (string.IsNullOrWhiteSpace(txt_MaLop.Text))
-        //    {
-        //        return;
-        //    }
+        private void btn_viewCl_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txt_MaLop.Text))
+            {
+                return;
+            }
 
-        //    //string maLop = txt_MaLop.Text.Trim();
+            string maLop = txt_MaLop.Text.Trim();
 
-        //    //UserControlStudent ucSV = new UserControlStudent();
+            //UserControlStudent ucSV = new UserControlStudent();
 
-        //    //Home homeForm = this.FindForm() as Home;
-        //    //if (homeForm == null) return;
+            //Home homeForm = this.FindForm() as Home;
+            //if (homeForm == null) return;
 
-        //    //homeForm.showStudentbyClass(ucSV);
+            //homeForm.showStudentbyClass(ucSV);
 
-        //    //ucSV.LoadStudentByClass(maLop);
-        //}
+            //ucSV.LoadStudentByClass(maLop);
+
+            studentsInClassList sicl = new studentsInClassList();
+            sicl.LoadStudentInClass(maLop);
+            sicl.Show();
+        }
 
         private void btn_goFirstCl_Click(object sender, EventArgs e)
         {

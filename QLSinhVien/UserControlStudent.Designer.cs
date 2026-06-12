@@ -244,6 +244,7 @@
             // 
             // txt_TenSV
             // 
+            this.txt_TenSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(254)));
             this.txt_TenSV.Location = new System.Drawing.Point(10, 97);
             this.txt_TenSV.Name = "txt_TenSV";
             this.txt_TenSV.Size = new System.Drawing.Size(269, 21);
