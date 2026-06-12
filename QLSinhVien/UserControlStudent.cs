@@ -148,24 +148,24 @@ namespace QLSinhVien
             ClearData();
         }
 
-        //private void btn_updateSt_Click(object sender, EventArgs e)
-        //{
-        //    SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
-        //    if (sv == null)
-        //    {
-        //        return;
-        //    }
+        private void btn_updateSt_Click(object sender, EventArgs e)
+        {
+            SinhVien sv = db.SinhViens.FirstOrDefault(x => x.MaSV == txt_MaSV.Text.Trim());
+            if (sv == null)
+            {
+                return;
+            }
 
-        //    sv.HoTen = txt_TenSV.Text.Trim();
-        //    sv.Gender = txt_Gender.Text;
-        //    sv.Birth = txt_Birth.Value;
-        //    sv.MaLop = txt_Class.Text;
+            sv.HoTen = txt_TenSV.Text.Trim();
+            sv.Gender = txt_Gender.Text;
+            sv.Birth = txt_Birth.Value;
+            sv.MaLop = txt_Class.Text;
 
-        //    db.SubmitChanges();
+            db.SubmitChanges();
 
-        //    LoadStudentTable();
-        //    ClearData();
-        //}
+            LoadStudentTable();
+            ClearData();
+        }
 
         //private void btn_deleteSt_Click(object sender, EventArgs e)
         //{

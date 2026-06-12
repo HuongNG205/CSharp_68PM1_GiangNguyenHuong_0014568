@@ -168,10 +168,10 @@ namespace QLSinhVien
             ClearData();
         }
 
-        private void btn_searchCl_Click(object sender, EventArgs e)
-        {
-            LoadClassTable(txt_searchCl.Text);
-        }
+        //private void btn_searchCl_Click(object sender, EventArgs e)
+        //{
+        //    LoadClassTable(txt_searchCl.Text);
+        //}
 
         //private void btn_viewCl_Click(object sender, EventArgs e)
         //{
