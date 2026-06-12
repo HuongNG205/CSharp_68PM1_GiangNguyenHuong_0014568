@@ -90,19 +90,19 @@ namespace QLSinhVien
             txt_Note.Clear();
         }
 
-        //private void table_Class_CellClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.RowIndex < 0)
-        //    {
-        //        return;
-        //    }
+        private void table_Class_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
 
-        //    DataGridViewRow row = table_Class.Rows[e.RowIndex];
-        //    txt_MaID.Text = row.Cells["id"].Value.ToString();
-        //    txt_MaLop.Text = row.Cells["MaLop"].Value.ToString();
-        //    txt_TenLop.Text = row.Cells["TenLop"].Value.ToString();
-        //    txt_Note.Text = row.Cells["Note"].Value?.ToString() ?? "";
-        //}
+            DataGridViewRow row = table_Class.Rows[e.RowIndex];
+            txt_MaID.Text = row.Cells["id"].Value.ToString();
+            txt_MaLop.Text = row.Cells["MaLop"].Value.ToString();
+            txt_TenLop.Text = row.Cells["TenLop"].Value.ToString();
+            txt_Note.Text = row.Cells["Note"].Value?.ToString() ?? "";
+        }
 
         private void btn_addCl_Click(object sender, EventArgs e)
         {
@@ -119,48 +119,48 @@ namespace QLSinhVien
             ClearData();
         }
 
-        //private void btn_updateCl_Click(object sender, EventArgs e)
-        //{
-        //    LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
-        //    if (cl == null)
-        //    {
-        //        return;
-        //    }
+        private void btn_updateCl_Click(object sender, EventArgs e)
+        {
+            LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
+            if (cl == null)
+            {
+                return;
+            }
 
-        //    cl.MaLop = txt_MaLop.Text.Trim();
-        //    cl.TenLop = txt_TenLop.Text.Trim();
-        //    cl.Note = txt_Note.Text.Trim();
+            cl.MaLop = txt_MaLop.Text.Trim();
+            cl.TenLop = txt_TenLop.Text.Trim();
+            cl.Note = txt_Note.Text.Trim();
 
-        //    db.SubmitChanges();
+            db.SubmitChanges();
 
-        //    LoadClassTable();
-        //    ClearData();
-        //}
+            LoadClassTable();
+            ClearData();
+        }
 
-        //private void btn_deleteCl_Click(object sender, EventArgs e)
-        //{
-        //    LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
-        //    if (cl == null)
-        //    {
-        //        return;
-        //    }
+        private void btn_deleteCl_Click(object sender, EventArgs e)
+        {
+            LopHoc cl = db.LopHocs.FirstOrDefault(x => x.id == int.Parse(txt_MaID.Text.Trim()));
+            if (cl == null)
+            {
+                return;
+            }
 
-        //    List<SinhVien> studentList = db.SinhViens.Where(sv => sv.MaLop == cl.MaLop).ToList();
-        //    //foreach (SinhVien sv in studentList)
-        //    //{
-        //    //    sv.MaLop = "NONE";
-        //    //}
-        //    if (studentList.Count > 0)
-        //    {
-        //        return;
-        //    }
+            List<SinhVien> studentList = db.SinhViens.Where(sv => sv.MaLop == cl.MaLop).ToList();
+            //foreach (SinhVien sv in studentList)
+            //{
+            //    sv.MaLop = "NONE";
+            //}
+            if (studentList.Count > 0)
+            {
+                return;
+            }
 
-        //    db.LopHocs.DeleteOnSubmit(cl);
-        //    db.SubmitChanges();
+            db.LopHocs.DeleteOnSubmit(cl);
+            db.SubmitChanges();
 
-        //    LoadClassTable();
-        //    ClearData();
-        //}
+            LoadClassTable();
+            ClearData();
+        }
 
         private void btn_renewCl_Click(object sender, EventArgs e)
         {
@@ -168,10 +168,10 @@ namespace QLSinhVien
             ClearData();
         }
 
-        //private void btn_searchCl_Click(object sender, EventArgs e)
-        //{
-        //    LoadClassTable(txt_searchCl.Text);
-        //}
+        private void btn_searchCl_Click(object sender, EventArgs e)
+        {
+            LoadClassTable(txt_searchCl.Text);
+        }
 
         //private void btn_viewCl_Click(object sender, EventArgs e)
         //{
